@@ -34,8 +34,7 @@ try:
                 send_comment = browser.find_element_by_class_name('Ypffh')
                 send_comment.send_keys('Тестовый комментарии')
                 send_comment.send_keys(Keys.ENTER)
-                time.sleep(5)
-
+                time.sleep(600)
     while True:
         sendComment()
 except Exception:
