@@ -1,2 +1,2 @@
-username = 'gosmanager'
-password = '020601Aa'
+username = 'username'
+password = 'password'
