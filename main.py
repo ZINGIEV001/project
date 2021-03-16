@@ -4,9 +4,10 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from auth_data import username, password
 import time
-from comments import commentaries, rand_comm
+from comments import commentaries
 
 bot = telebot.TeleBot('1696728315:AAG7PwNqsyj6d2r9yZ59YceuFOzqUUhdavs')
+
 
 @bot.message_handler(commands=['start'])
 def starts(message):
@@ -42,11 +43,9 @@ def starts(message):
                 btn_like = browser.find_element_by_class_name('fr66n')
                 btn_like.click()
                 time.sleep(0.5)
-                send_rand_comm = ['']
 
                 for i in range(3):
                     global commentaries
-                    send_rand_comm.append(sendComment)
                     send_comment = browser.find_element_by_class_name('Ypffh')
                     send_comment.click()
 
@@ -56,13 +55,12 @@ def starts(message):
 
                     send_comment.send_keys(Keys.ENTER)
                     time.sleep(5)
-            global rand_comm
-            rand_comm = []
 
     except Exception:
         bot.send_message(message.chat.id, 'Ошибка. Программа приостоновлена')
 
     while True:
         sendComment()
+
 
 bot.polling()

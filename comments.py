@@ -1,4 +1,5 @@
 import random
+import time
 send_comment = [
     'Дала 1алаш войла Хьо, Лераме ПАЧЧАХЬ!',
     'ДАЛА БАКЪО ТОЛА ЙОЙЛА',
@@ -16,7 +17,11 @@ send_comment = [
     'Дала сий, лерам, бойла хьан, сийлахь Паччахь'
 ]
 
+rand_comm =[]
 def commentaries():
+    global rand_comm
+    if len(rand_comm) == 3:
+        rand_comm = []
     while True:
         rand = random.choice(send_comment)
         if rand not in rand_comm:
