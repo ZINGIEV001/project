@@ -25,7 +25,6 @@ def starts(message):
 
     try:
         def sendComment():
-            global send_comment
             browser.get('https://instagram.com/app.python')
             time.sleep(3)
 
@@ -46,6 +45,8 @@ def starts(message):
 
                 for i in range(3):
                     global commentaries
+                    browser.get(posts_urls[0])
+                    time.sleep(5)
                     send_comment = browser.find_element_by_class_name('Ypffh')
                     send_comment.click()
 
@@ -54,7 +55,7 @@ def starts(message):
                     time.sleep(2)
 
                     send_comment.send_keys(Keys.ENTER)
-                    time.sleep(600)
+                    time.sleep(595)
 
     except Exception:
         bot.send_message(message.chat.id, 'Ошибка. Программа приостоновлена')
