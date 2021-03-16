@@ -12,6 +12,7 @@ bot = telebot.TeleBot('1696728315:AAG7PwNqsyj6d2r9yZ59YceuFOzqUUhdavs')
 
 @bot.message_handler(commands=['start'])
 def starts(message):
+    bot.send_message(message.chat_id, 'Программа запущена')
     ua = dict(DesiredCapabilities.CHROME)
     options = webdriver.ChromeOptions()
     options.add_argument('headless')
