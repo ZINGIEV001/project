@@ -5,15 +5,20 @@ from selenium.webdriver.common.keys import Keys
 from auth_data import username, password
 import time
 from comments import commentaries
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 bot = telebot.TeleBot('1696728315:AAG7PwNqsyj6d2r9yZ59YceuFOzqUUhdavs')
 
 
 @bot.message_handler(commands=['start'])
 def starts(message):
-    browser = webdriver.Chrome('chromedriver.exe')
-
+    ua = dict(DesiredCapabilities.CHROME)
+    options = webdriver.ChromeOptions()
+    options.add_argument('headless')
+    options.add_argument('window-size=1920x935')
+    browser = webdriver.Chrome(chrome_options=options)
     browser.get('https://instagram.com')
+
     time.sleep(3.5)
 
     browser.find_element_by_name('username').send_keys(username)
@@ -46,7 +51,7 @@ def starts(message):
                 for i in range(3):
                     global commentaries
                     browser.get(posts_urls[0])
-                    time.sleep(5)
+                    time.sleep(2)
                     send_comment = browser.find_element_by_class_name('Ypffh')
                     send_comment.click()
 
@@ -55,7 +60,7 @@ def starts(message):
                     time.sleep(2)
 
                     send_comment.send_keys(Keys.ENTER)
-                    time.sleep(595)
+                    time.sleep(2)
 
     except Exception:
         bot.send_message(message.chat.id, 'Ошибка. Программа приостоновлена')
