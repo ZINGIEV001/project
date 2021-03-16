@@ -21,20 +21,34 @@ try:
     def sendComment():
         browser.get('https://instagram.com/yasinzingiev')
         time.sleep(3)
+
         links_posts = browser.find_elements_by_tag_name('a')
         posts_urls = [item.get_attribute(
             'href') for item in links_posts if '/p/' in item.get_attribute('href')]
         time.sleep(2)
+
         if posts_urls[0] not in one_link:
             one_link.append(posts_urls[0])
+
+            browser.get(posts_urls[0])
+            time.sleep(2)
+
+            btn_like = browser.find_element_by_class_name('fr66n')
+            btn_like.click()
+            time.sleep(0.5)
+
             for i in range(3):
                 browser.get(posts_urls[0])
+
                 send_comment = browser.find_element_by_class_name('Ypffh')
                 send_comment.click()
+
                 send_comment = browser.find_element_by_class_name('Ypffh')
                 send_comment.send_keys('Тестовый комментарии')
+                time.sleep(2)
+
                 send_comment.send_keys(Keys.ENTER)
-                time.sleep(600)
+                time.sleep(5)
     while True:
         sendComment()
 except Exception:
