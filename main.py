@@ -54,7 +54,7 @@ def starts(message):
                     time.sleep(2)
 
                     send_comment.send_keys(Keys.ENTER)
-                    time.sleep(5)
+                    time.sleep(600)
 
     except Exception:
         bot.send_message(message.chat.id, 'Ошибка. Программа приостоновлена')

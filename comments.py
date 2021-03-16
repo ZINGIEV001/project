@@ -3,7 +3,6 @@ import time
 send_comment = [
     'Дала 1алаш войла Хьо, Лераме ПАЧЧАХЬ!',
     'ДАЛА БАКЪО ТОЛА ЙОЙЛА',
-    'АХМАТ СИЛА',
     'Дала диканца бекхам бойла хьуна',
     'ДАЛА Т1АЬХЬЕ БЕРКАТЕ ЙОЙЛА!',
     'Шеф дала 1АЛШ ВОЙЛА хьо',
@@ -20,7 +19,7 @@ send_comment = [
 rand_comm =[]
 def commentaries():
     global rand_comm
-    if len(rand_comm) == 3:
+    if len(rand_comm) == 12:
         rand_comm = []
     while True:
         rand = random.choice(send_comment)
