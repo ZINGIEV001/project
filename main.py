@@ -4,19 +4,30 @@ from selenium.webdriver.common.keys import Keys
 import time
 from comments import commentaries
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
-options = Options()
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36"
+options = webdriver.ChromeOptions()
 options.headless = True
-browser = webdriver.Chrome(executable_path='chromedriver.exe', chrome_options=options)
+options.add_argument(f'user-agent={user_agent}')
+options.add_argument("--window-size=1920,1080")
+options.add_argument('--ignore-certificate-errors')
+options.add_argument('--allow-running-insecure-content')
+options.add_argument("--disable-extensions")
+options.add_argument("--proxy-server='direct://'")
+options.add_argument("--proxy-bypass-list=*")
+options.add_argument("--start-maximized")
+options.add_argument('--disable-gpu')
+options.add_argument('--disable-dev-shm-usage')
+options.add_argument('--no-sandbox')
+browser = webdriver.Chrome(executable_path="/home/instabot/chromedriver", options=options)
 
 # browser = webdriver.Chrome('chromedriver.exe')
-browser.get('https://instagram.com')
-
-print('Работает')
+browser.get('https://www.instagram.com')
 time.sleep(5)
 
-username = 'app.python'
+username = 'gosmanager'
 password = '020601Aa'
 
 browser.find_element_by_name('username').send_keys(username)
@@ -28,7 +39,10 @@ one_link = []
 
 try:
     def sendComment():
-        print('Цикл начался')
+        global one_link
+        print('Начало цикла')
+        if len(one_link) > 30:
+            one_link = []
         browser.get('https://instagram.com/app.python')
         time.sleep(3)
 
@@ -50,7 +64,7 @@ try:
             for i in range(3):
                 global commentaries
                 browser.get(posts_urls[0])
-                time.sleep(2)
+                time.sleep(3)
                 send_comment = browser.find_element_by_class_name('Ypffh')
                 send_comment.click()
 
@@ -59,7 +73,7 @@ try:
                 time.sleep(2)
 
                 send_comment.send_keys(Keys.ENTER)
-                time.sleep(2)
+                time.sleep(5)
 
 except Exception as ex:
     print(ex)
