@@ -1,5 +1,4 @@
 import random
-import time
 send_comment = [
     'Дала 1алаш войла Хьо, Лераме ПАЧЧАХЬ!',
     'ДАЛА БАКЪО ТОЛА ЙОЙЛА',
