@@ -1,21 +1,23 @@
-import telebot
 import random
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from auth_data import username, password
 import time
 from comments import commentaries
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.chrome.options import Options
 
 
-ua = dict(DesiredCapabilities.CHROME)
-options = webdriver.ChromeOptions()
-options.add_argument('headless')
-options.add_argument('window-size=1920x935')
-browser = webdriver.Chrome(chrome_options=options)
+options = Options()
+options.headless = True
+browser = webdriver.Chrome(executable_path='chromedriver.exe', chrome_options=options)
+
+# browser = webdriver.Chrome('chromedriver.exe')
 browser.get('https://instagram.com')
 
-time.sleep(3.5)
+print('Работает')
+time.sleep(5)
+
+username = 'app.python'
+password = '020601Aa'
 
 browser.find_element_by_name('username').send_keys(username)
 browser.find_element_by_name('password').send_keys(password)
@@ -26,8 +28,7 @@ one_link = []
 
 try:
     def sendComment():
-        if len(one_link) == 33:
-            one_link = []
+        print('Цикл начался')
         browser.get('https://instagram.com/app.python')
         time.sleep(3)
 
