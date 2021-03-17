@@ -10,64 +10,72 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 bot = telebot.TeleBot('1696728315:AAG7PwNqsyj6d2r9yZ59YceuFOzqUUhdavs')
 
 
-@bot.message_handler(commands=['start'])
+@bot.message_handler(content_types=['text'])
 def starts(message):
-    bot.send_message(message.chat_id, 'Программа запущена')
-    ua = dict(DesiredCapabilities.CHROME)
-    options = webdriver.ChromeOptions()
-    options.add_argument('headless')
-    options.add_argument('window-size=1920x935')
-    browser = webdriver.Chrome(chrome_options=options)
-    browser.get('https://instagram.com')
+    if message.text == '/start'
+        bot.send_message(message.chat_id, 'Программа запущена')
 
-    time.sleep(3.5)
+        # ua = dict(DesiredCapabilities.CHROME)
+        # options = webdriver.ChromeOptions()
+        # options.add_argument('headless')
+        # options.add_argument('window-size=1920x935')
 
-    browser.find_element_by_name('username').send_keys(username)
-    browser.find_element_by_name('password').send_keys(password)
-    browser.find_element_by_name('password').send_keys(Keys.ENTER)
-    time.sleep(3)
+        # browser = webdriver.Chrome(chrome_options=options)
+        browser = webdriver.Chrome('chromedriver.exe')
 
-    one_link = []
+        browser.get('https://instagram.com')
 
-    try:
-        def sendComment():
-            browser.get('https://instagram.com/app.python')
-            time.sleep(3)
+        time.sleep(3.5)
 
-            links_posts = browser.find_elements_by_tag_name('a')
-            posts_urls = [item.get_attribute(
-                'href') for item in links_posts if '/p/' in item.get_attribute('href')]
-            time.sleep(2)
+        browser.find_element_by_name('username').send_keys(username)
+        browser.find_element_by_name('password').send_keys(password)
+        browser.find_element_by_name('password').send_keys(Keys.ENTER)
+        time.sleep(3)
 
-            if posts_urls[0] not in one_link:
-                one_link.append(posts_urls[0])
+        one_link = []
 
-                browser.get(posts_urls[0])
+        try:
+            def sendComment():
+                browser.get('https://instagram.com/app.python')
+                time.sleep(3)
+
+                links_posts = browser.find_elements_by_tag_name('a')
+                posts_urls = [item.get_attribute(
+                    'href') for item in links_posts if '/p/' in item.get_attribute('href')]
                 time.sleep(2)
 
-                btn_like = browser.find_element_by_class_name('fr66n')
-                btn_like.click()
-                time.sleep(0.5)
+                if posts_urls[0] not in one_link:
+                    one_link.append(posts_urls[0])
 
-                for i in range(3):
-                    global commentaries
                     browser.get(posts_urls[0])
                     time.sleep(2)
-                    send_comment = browser.find_element_by_class_name('Ypffh')
-                    send_comment.click()
 
-                    send_comment = browser.find_element_by_class_name('Ypffh')
-                    send_comment.send_keys(commentaries())
-                    time.sleep(2)
+                    btn_like = browser.find_element_by_class_name('fr66n')
+                    btn_like.click()
+                    time.sleep(0.5)
 
-                    send_comment.send_keys(Keys.ENTER)
-                    time.sleep(2)
+                    for i in range(3):
+                        global commentaries
+                        browser.get(posts_urls[0])
+                        time.sleep(2)
+                        send_comment = browser.find_element_by_class_name('Ypffh')
+                        send_comment.click()
 
-    except Exception:
-        bot.send_message(message.chat.id, 'Ошибка. Программа приостоновлена')
+                        send_comment = browser.find_element_by_class_name('Ypffh')
+                        send_comment.send_keys(commentaries())
+                        time.sleep(2)
 
-    while True:
-        sendComment()
+                        send_comment.send_keys(Keys.ENTER)
+                        time.sleep(2)
+
+        except Exception:
+            bot.send_message(message.chat.id, 'Ошибка. Программа приостоновлена')
+
+        while True:
+            if message.text == '/stop':
+                break
+            else:
+                sendComment()
 
 
 bot.polling()
