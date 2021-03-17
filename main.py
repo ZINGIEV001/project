@@ -31,6 +31,8 @@ def starts(message):
 
     try:
         def sendComment():
+            if len(one_link) == 33:
+                one_link = []
             browser.get('https://instagram.com/app.python')
             time.sleep(3)
 
